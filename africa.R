@@ -29,8 +29,8 @@ runTrain <- function(dir = '/home/wijnand/R_workspace_africa')
                         method = "lm",
                         trControl = ctrl)
       print(lmTuneCa)
-      
       #RMSE = 0.409
+
       testResults <- data.frame(PIDN = IDtest,
                                 Ca = predict(lmTuneCa, Xtestfiltered))
       
@@ -39,8 +39,8 @@ runTrain <- function(dir = '/home/wijnand/R_workspace_africa')
                        method = "lm",
                        trControl = ctrl)
       print(lmTuneP)
-      
       #RMSE = 0.925
+
       testResults$P <- predict(lmTuneP,Xtestfiltered)
       
       #predict pH
@@ -48,8 +48,8 @@ runTrain <- function(dir = '/home/wijnand/R_workspace_africa')
                         method = "lm",
                         trControl = ctrl)
       print(lmTunepH)
-      
       #RMSE = 0.508
+
       testResults$pH <- predict(lmTunepH,Xtestfiltered)
       
       #predict SOC
@@ -57,8 +57,8 @@ runTrain <- function(dir = '/home/wijnand/R_workspace_africa')
                          method = "lm",
                          trControl = ctrl)
       print(lmTuneSOC)
-      
       #RMSE = 0.511
+
       testResults$SOC <- predict(lmTuneSOC,Xtestfiltered)
       
       #predict Sand
@@ -70,5 +70,5 @@ runTrain <- function(dir = '/home/wijnand/R_workspace_africa')
       #RMSE = 0.495
       testResults$Sand <- predict(lmTuneSand,Xtestfiltered)
       
-      #write.csv(testResults,file = "analytics/kaggle_challenges/africa_soil/slr.csv",row.names = FALSE)
+      write.csv(testResults,file = "analytics/kaggle_challenges/africa_soil/slr.csv",row.names = FALSE)
 }
