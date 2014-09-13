@@ -25,8 +25,8 @@ run <- function(dir = '/home/wijnand/R_workspace_africa')
         trainPart_h2o <- as.h2o(localH2O, trainPart, header = T)
         testPart_h2o <- as.h2o(localH2O, testPart, header = T)
         
-        #predictColumns <- c("Ca", "P", "pH", "SOC", "Sand")
-        predictColumns <- c("P")
+        predictColumns <- c("Ca", "P", "pH", "SOC", "Sand")
+        #predictColumns <- c("P")
         trainColumns <- colnames(trainPart[, !colnames(trainPart) %in% c("PIDN", "Ca", "P", "pH", "SOC", "Sand")])
         
         #trainedModel <- h2o.glm(x = trainColumns,
