@@ -1,0 +1,23 @@
+[1] "===summary==="
+[1] "Ca"   "P"    "pH"   "SOC"  "Sand"
+[1] 0.438 1.124 0.380 0.269 0.317
+[1] "MCRMSE (mean columnwise root mean squared error): 0.505959293908647"
+
+h2o.glm (default)
+
+
+[1] "===summary==="
+[1] "Ca"   "P"    "pH"   "SOC"  "Sand"
+[1] 0.609 1.200 0.618 0.563 0.529
+[1] "MCRMSE (mean columnwise root mean squared error): 0.70389857174057"
+
+h2o.gbm (10fold default)
+
+
+
+[1] "===summary==="
+[1] "Ca"   "P"    "pH"   "SOC"  "Sand"
+[1] 0.580 1.288 0.788 0.620 0.794
+[1] "MCRMSE (mean columnwise root mean squared error): 0.814109823390591"
+
+h2o.deeplearning (10fold default)
