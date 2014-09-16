@@ -70,7 +70,7 @@ run <- function(dir = '/home/wijnand/R_workspace_africa')
             print(rmse(predictionFrame, testPart[predictor]))
       }
       h2o.shutdown(localH2O, prompt = F)
-      write.csv(predictions, paste0(dir, '/resources/result.csv'), quote=F, row.names=F)
+      write.csv(predictions, paste0(dir, '/resources/result_h2o.csv'), quote=F, row.names=F)
       
       print("===summary===")
       print(predictColumns)

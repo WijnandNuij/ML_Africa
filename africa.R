@@ -1,13 +1,5 @@
 
 
-
-
-
-
-
-
-
-
 loadData <- function(dir = '/home/wijnand/R_workspace_africa')
 {
       library(caret)
