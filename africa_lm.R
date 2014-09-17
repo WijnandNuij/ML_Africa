@@ -33,20 +33,24 @@ run <- function(dir = '/home/wijnand/R_workspace_africa')
       Xtestfiltered  <-  cbind(Xtestfiltered, Ytest)
       
       RMSE <- NULL
+      predictions <- as.data.frame(Xtestfiltered$PIDN)
+      ctrl = trainControl(method = "cv", 
+                          number = 10)
       
       library(Metrics)
       for(predictor in predictColumns)
       {
-            trainedModel <- train(x = Xtrainfiltered,
-                                  y = Xtrainfiltered[predictor],
+            trainedModel <- train(x = Xtrainfiltered[, !colnames(Xtrainfiltered) %in% c("PIDN", "Ca", "P", "pH", "SOC", "Sand")],
+                                  y = as.vector(t(Xtrainfiltered[predictor])),
+                                  trControl = ctrl,
                                   method = "lm")
             
             prediction <- predict(trainedModel, newdata = Xtestfiltered)
             predictionFrame <- as.data.frame(prediction)
             
             predictions[predictor] <- predictionFrame
-            RMSE <- c(RMSE, rmse(predictionFrame, testPart[predictor]))              
-            print(rmse(predictionFrame, testPart[predictor]))
+            RMSE <- c(RMSE, rmse(predictionFrame, Xtestfiltered[predictor]))              
+            print(rmse(predictionFrame, Xtestfiltered[predictor]))
       }
       write.csv(predictions, paste0(dir, '/resources/result_lm.csv'), quote=F, row.names=F)
       
