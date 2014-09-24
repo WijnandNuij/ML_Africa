@@ -54,12 +54,29 @@ run <- function(dir = '/home/wijnand/R_workspace_africa')
             #                        nfolds = 10,
             #                         )  
             
-            trainedModel <- h2o.deeplearning(x = trainColumns,
-                                             y = predictor,
-                                             data = trainPart_h2o,
-                                             nfolds = 10,
-                                             classification = F
-                                                )
+            #trainedModel <- h2o.deeplearning(x = trainColumns,
+            #                                 y = predictor,
+            #                                 data = trainPart_h2o,
+            #                                 nfolds = 10,
+            #                                 epochs = 100,
+            #                                 hidden = c(500,500),
+            #                                 variable_importances = TRUE,
+            #                                 activation = c("Tanh", "Rectifier", "Maxout", 
+            #                                                "TanhWithDropout", "RectifierWithDropout", "MaxoutWithDropout"),
+            #                                 classification = F
+            #                                    )
+            
+            trainedModel = h2o.randomForest(x = trainColumns, 
+                                              y = predictor, 
+                                              data = trainPart_h2o, 
+                                              classification = FALSE,
+                                              importance = T,
+                                              ntree = 20, 
+                                              depth = 20, 
+                                              balance.classes=F, 
+                                              mtries = 100,
+                                            oobee = T,
+                                              type = "BigData")
             
             
             prediction <- h2o.predict(trainedModel, newdata = testPart_h2o)
