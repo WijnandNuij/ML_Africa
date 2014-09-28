@@ -30,3 +30,10 @@ h2o.deeplearning (10fold default)
 
 h2o.randomForest(classification = FALSE,importance = T,ntree = 20, 
 depth = 20, balance.classes=F, mtries = 100,oobee = T,type = "BigData")
+
+
+
+
+0.413496
+0.8265656
+0.554131

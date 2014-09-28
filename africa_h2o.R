@@ -6,7 +6,7 @@ run <- function(dir = '/home/wijnand/R_workspace_africa')
       system("killall -9 java")
       system("rm -rf /tmp/h2o-wijnand/*")
       ## start h2o
-      system("nohup java -jar -Xmx6g /home/wijnand/Applications/h2o-2.6.1.5/h2o.jar > /home/wijnand/Applications/h2o-2.6.1.5/run.log &")
+      system("nohup java -jar -Xmx2g /home/wijnand/Applications/h2o-2.6.1.5/h2o.jar > /home/wijnand/Applications/h2o-2.6.1.5/run.log &")
       print('starting h2o...')
       Sys.sleep(2)
       
@@ -29,11 +29,6 @@ run <- function(dir = '/home/wijnand/R_workspace_africa')
       #predictColumns <- c("P")
       trainColumns <- colnames(trainPart[, !colnames(trainPart) %in% c("PIDN", "Ca", "P", "pH", "SOC", "Sand")])
       
-      #trainedModel <- h2o.glm(x = trainColumns,
-      #                        y = "Ca",
-      #                        data = trainPart_h2o,
-      #                        family = "gaussian")
-      
       predictions <- as.data.frame(testPart$PIDN)
       RMSE <- NULL
       
@@ -47,12 +42,19 @@ run <- function(dir = '/home/wijnand/R_workspace_africa')
             #                        nfolds = 10
             #                        )
             
-            #trainedModel <- h2o.glm(x = trainColumns,
-            #                        y = predictor,
-            #                        data = trainPart_h2o,
-            #                        family = "gaussian",
-            #                        nfolds = 10,
-            #                         )  
+            trainedModel <- h2o.glm(x = trainColumns,
+                                    y = predictor,
+                                    data = trainPart_h2o,
+                                    family = "gaussian",
+                                    nfolds = 10,
+                                    iter.max = 400,
+                                    higher_accuracy = T,
+                                  #  variable_importances = T,
+                                    use_all_factor_levels = T,
+                                    lambda_search = T
+                                     )  
+            
+            print(trainedModel)
             
             #trainedModel <- h2o.deeplearning(x = trainColumns,
             #                                 y = predictor,
@@ -66,17 +68,17 @@ run <- function(dir = '/home/wijnand/R_workspace_africa')
             #                                 classification = F
             #                                    )
             
-            trainedModel = h2o.randomForest(x = trainColumns, 
-                                              y = predictor, 
-                                              data = trainPart_h2o, 
-                                              classification = FALSE,
-                                              importance = T,
-                                              ntree = 20, 
-                                              depth = 20, 
-                                              balance.classes=F, 
-                                              mtries = 100,
-                                            oobee = T,
-                                              type = "BigData")
+            #trainedModel = h2o.randomForest(x = trainColumns, 
+            #                                  y = predictor, 
+            #                                  data = trainPart_h2o, 
+            #                                  classification = FALSE,
+            #                                  importance = T,
+            #                                  ntree = 20, 
+            #                                  depth = 20, 
+            #                                  balance.classes=F, 
+            #                                  mtries = 100,
+            #                                oobee = T,
+            #                                  type = "BigData")
             
             
             prediction <- h2o.predict(trainedModel, newdata = testPart_h2o)
