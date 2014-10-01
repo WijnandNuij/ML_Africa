@@ -6,7 +6,7 @@ run <- function(dir = '/home/wijnand/R_workspace_africa')
       system("killall -9 java")
       system("rm -rf /tmp/h2o-wijnand/*")
       ## start h2o
-      system("nohup java -jar -Xmx2g /home/wijnand/Applications/h2o-2.6.1.5/h2o.jar > /home/wijnand/Applications/h2o-2.6.1.5/run.log &")
+      system("nohup java -jar -Xmx6g /home/wijnand/Applications/h2o-2.6.1.5/h2o.jar > /home/wijnand/Applications/h2o-2.6.1.5/run.log &")
       print('starting h2o...')
       Sys.sleep(2)
       

@@ -32,8 +32,9 @@ h2o.randomForest(classification = FALSE,importance = T,ntree = 20,
 depth = 20, balance.classes=F, mtries = 100,oobee = T,type = "BigData")
 
 
+[1] "===summary==="
+[1] "Ca"   "P"    "pH"   "SOC"  "Sand"
+[1] 0.413 0.827 0.554 0.414 0.595
+[1] "MCRMSE (mean columnwise root mean squared error): 0.560619144698152"
 
-
-0.413496
-0.8265656
-0.554131
+h2o.glm(family = "gaussian",nfolds = 10,iter.max = 400,higher_accuracy = T,use_all_factor_levels = T, lambda_search = T
